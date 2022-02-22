@@ -15,7 +15,7 @@ import random
 
 # Listes principales avec toutes les piles de sablese (complétés plus tard)
 L_SANDPILES = []
-WIDTH_TERRAIN = 20 # possible de modifier/générer aléatoirement
+WIDTH_TERRAIN = 3 # possible de modifier/générer aléatoirement
 SIZE_SANDPILE = 35 # Nombre de pixels pour les carrés des piles de sables dans le canvas
 
 # Ce ne sont pas des constantes, mais des listes très importantes pour le programme
@@ -123,10 +123,22 @@ def create_sandpiles_list(canvas):
 
     
 
-def stabilize_sandpiles_window(): # TO DO
+def stabiliz_able():
+    global L_SANDPILES
+
+    sum_elements = 0
+    for el in L_SANDPILES[1:-1]:
+        sum_elements += sum(el[1:-1])
+    
+    sum_max = 3* ((len(L_SANDPILES[0])-2)**2)
+    return sum_elements <= sum_max
+
+
+def stabilize_sandpiles_window(): # Fais ce qui est dit...
     global L_SANDPILES, L_CANVAS_RECTANGLES, L_CANVAS_TEXTS, WIDTH_TERRAIN
 
-    while not stability_test(L_SANDPILES):
+    to_stabilize = stabiliz_able() # possbile de stabiliser la pile ? (en fct des consignes)
+    while not stability_test(L_SANDPILES): # and to_stabilize # <- à mettre en fct des consignes
         for y in range(1, len(L_SANDPILES)-1):
             for x in range(1, len(L_SANDPILES[y])-1):
                 update_sanpiles_list(x,y)
