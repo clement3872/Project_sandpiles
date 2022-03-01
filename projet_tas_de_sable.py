@@ -44,16 +44,6 @@ def update_sanpiles_list(x, y):
         if type(L_SANDPILES[y+1][x]) != type(str()): L_SANDPILES[y+1][x] += 1
         if type(L_SANDPILES[y][x+1]) != type(str()): L_SANDPILES[y][x+1] += 1
 
-    
-    """
-    # parcourir la liste des tas de sables
-    while not stability_test(L_SANDPILES):
-        for y in range(1, len(L_SANDPILES)):
-            for x in range(1, len(L_SANDPILES[y])):
-                pass
-    """
-            
-
 
 
 def generate_table(width_terrain=3):
@@ -214,12 +204,16 @@ CE QU'IL RESTE A FAIRE: (pourquoi? jsp)
 # Idée: ne pas prendre la 1ère et dernière liste en compte 
 #   -> boucle for de 1 a len(l)-1
 def sum_up(l1=None, l2=None):
+    #pour pouvoir tester:
+    l1= generate_table();l2= generate_table()
     if l1!=None and l2!=None: # Juste une petite sécurité...
         pass #à vous de jouer ! :D
 
 # Faire la somme case par case de liste
 # Même conseils
 def substract(l1=None, l2=None):
+    #pour pouvoir tester:
+    l1= generate_table();l2= generate_table()
     if l1!=None and l2!=None: # Juste une petite sécurité...
         pass #à vous de jouer ! :D
 
