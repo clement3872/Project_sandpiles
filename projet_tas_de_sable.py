@@ -14,7 +14,7 @@ import random
 
 
 # Listes principales avec toutes les piles de sablese (complétés plus tard)
-L_SANDPILES = []
+L_SANDPILES = [] # Ce n'est pas une constant
 WIDTH_TERRAIN = 3 # possible de modifier/générer aléatoirement
 SIZE_SANDPILE = 35 # Nombre de pixels pour les carrés des piles de sables dans le canvas
 
@@ -105,8 +105,10 @@ def create_sandpile_texts_object(canvas=None, coords=(0,0), text_=""):
 
 def create_sandpiles_list(canvas):
     global L_SANDPILES, L_CANVAS_RECTANGLES, L_CANVAS_TEXTS
+    L_SANDPILES = generate_table(WIDTH_TERRAIN)
     L_CANVAS_TEXTS = []
     L_CANVAS_RECTANGLES = []
+    canvas.delete("all") 
     
     # Création et ajouts des rectangles et du text du canvas
     for y in range(len(L_SANDPILES)):
@@ -146,10 +148,9 @@ def stabilize_sandpiles_window(): # Fais ce qui est dit...
 
 
 def main():
-    global L_SANDPILES, WIDTH_TERRAIN, SIZE_SANDPILE
+    global WIDTH_TERRAIN, SIZE_SANDPILE
 
     # Premier remplissage de la liste pour la génération du terrain
-    L_SANDPILES = generate_table(WIDTH_TERRAIN)
 
     root = tk.Tk()
 
@@ -161,36 +162,87 @@ def main():
 
     #Création des buttons (+ les afficher, avec pack)
     b_generate_terrain = tk.Button(f_buttons, text="Generate terrain",command=lambda:create_sandpiles_list(can))
-    b_add_sand = tk.Button(f_buttons, text="Add sand")
     b_stabilize = tk.Button(f_buttons, text="Stabilize", command=stabilize_sandpiles_window)
+    b_save_config = tk.Button(f_buttons, text="Stabilize", command=save_config)
     
     # Création d'un Canvas
-    can = tk.Canvas(f_canvas, width=SIZE_SANDPILE*len(L_SANDPILES[0]), height=SIZE_SANDPILE*len(L_SANDPILES) )
+    can = tk.Canvas(f_canvas, width=SIZE_SANDPILE*(WIDTH_TERRAIN+2), height=SIZE_SANDPILE*(WIDTH_TERRAIN+2) )
     
     b_generate_terrain.pack()
     b_stabilize.pack()
-    b_add_sand.pack()
+    b_save_config.pack()
     can.pack(padx=50, pady=50)  
     
 
     root.mainloop()
 
-#Juste afficher dans la console, pour tester
 
-def print_list(l):
-    for el in l:
-        print(el)
+"""
+Comment ça fonctionne :
+On a des fonctions créés/modifient des listes, elles sont à peu près de même structures.
+Ce sont toutes des listes de listes tel quel :
+
+L_SANDPILES = [ # ce n'est qu'un exemple, puisque c'est généré aléatoirement
+        ['', '#', '#', '#', ''], # ligne 1 
+        ['#', 0, 0, 2, '#'],    # ligne 2 
+        ['#', 4, 3, 6, '#'],    # ...
+        ['#', 6, 5, 5, '#'],
+        ['', '#', '#', '#', '']
+    ]
+Chaque indice de la liste peut être considéré comme des coordonnées de forme 
+(y,x) (donc à l'envers!):
+    - le premier '' (string vide): (0,0) -> x=0 et y=0
+    - le premier '#' de la ligne 1: (0,1) -> x=1 et y=0
+    - le premier 2 : (1,3) -> x=3 et y=1
+    -...
+(Bien sûr, pour obtenir les éléments dans la list, il faut faire L_SANDPILES[y][x])
+
+Un tas de sable n'est pas stable losqu'il est à 4 ou plus.
+Les fonctions qui permettent le faire, sont déjà là...
+(PS: vous pouvez lancer le code pour voir ce que ça fait)
+
+
+CE QU'IL RESTE A FAIRE: (pourquoi? jsp)
+    - sum_up 
+    - substract # oui, c'est presque la même...
+    - save_config 
+    (-open_config)
+"""
+
+
+# Faire la somme case par case de liste
+# Idée: ne pas prendre la 1ère et dernière liste en compte 
+#   -> boucle for de 1 a len(l)-1
+def sum_up(l1=None, l2=None):
+    if l1!=None and l2!=None: # Juste une petite sécurité...
+        pass #à vous de jouer ! :D
+
+# Faire la somme case par case de liste
+# Même conseils
+def substract(l1=None, l2=None):
+    if l1!=None and l2!=None: # Juste une petite sécurité...
+        pass #à vous de jouer ! :D
+
+
+# J'avais juste déjà l'idée... désolé - A COMPRENDRE!!
+def save_config(l=None):
+    if l != None: # Juste une petite sécurité...
+        f = open("save.txt", "w") 
+        f.write(str(l)) # l-> string ; écrire la string de le fichier
+        f.close() 
+# Je l'ai pas trouvé dans les consignes, mais ça paraissait "logique"
+# Si vous comprennez pas celle-ci, c'est pas dramatique
+def open_config():
+    saves = 0
+    try:
+        with open("save.txt", "r") as f:
+            saves = eval(f.readlines()) # Haha!
+    except:
+        print("Do not have save at the moment")
     
-    print()
+    return saves
 
+
+# Ca doit rester à la fin, c'est pour tout lancer...
 if __name__ == "__main__":
     main()
-    """
-    # Vérifier si ça fonctionne...
-    while not stability_test(L_SANDPILES):
-        print_list(L_SANDPILES)
-        for y in range(1, len(L_SANDPILES)-1):
-            for x in range(1, len(L_SANDPILES[y])-1):
-                update_sanpiles_list(x,y)
-
-    print_list(L_SANDPILES)"""
