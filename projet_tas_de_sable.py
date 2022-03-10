@@ -7,7 +7,6 @@
 # https://github.com/clement3872/Project_sandpiles.git
 ###################################
 
-
 # importation des libraries
 import tkinter as tk
 import random
@@ -126,7 +125,7 @@ def stabiliz_able():
     return sum_elements <= sum_max
 
 
-def stabilize_sandpiles_window(): # Fais ce qui est dit...
+def stabilize_sandpiles_window(canvas): # Fais ce qui est dit...
     global L_SANDPILES, L_CANVAS_RECTANGLES, L_CANVAS_TEXTS, WIDTH_TERRAIN
 
     to_stabilize = stabiliz_able() # possbile de stabiliser la pile ? (en fct des consignes)
@@ -135,7 +134,7 @@ def stabilize_sandpiles_window(): # Fais ce qui est dit...
             for x in range(1, len(L_SANDPILES[y])-1):
                 update_sanpiles_list(x,y)
                 L_CANVAS_TEXTS[-1].itemconfigure(L_CANVAS_TEXTS[y][x],text=str(L_SANDPILES[y][x]))
-
+                
 
 def main():
     global WIDTH_TERRAIN, SIZE_SANDPILE
@@ -152,8 +151,8 @@ def main():
 
     #Création des buttons (+ les afficher, avec pack)
     b_generate_terrain = tk.Button(f_buttons, text="Generate terrain",command=lambda:create_sandpiles_list(can))
-    b_stabilize = tk.Button(f_buttons, text="Stabilize", command=stabilize_sandpiles_window)
-    b_save_config = tk.Button(f_buttons, text="Save", command=save_config)
+    b_stabilize = tk.Button(f_buttons, text="Stabilize", command=lambda:stabilize_sandpiles_window(root))
+    b_save_config = tk.Button(f_buttons, text="Save configuration", command=save_config)
     
     # Création d'un Canvas
     can = tk.Canvas(f_canvas, width=SIZE_SANDPILE*(WIDTH_TERRAIN+2), height=SIZE_SANDPILE*(WIDTH_TERRAIN+2) )
@@ -215,6 +214,7 @@ def sum_up(l1=None, l2=None):
 
 # Faire la somme case par case de liste
 # Même conseils
+# Si la soustraction est négative -> mettre un 0 à la place
 def substract(l1=None, l2=None):
     #pour pouvoir tester:
     l1= generate_table();l2= generate_table()
