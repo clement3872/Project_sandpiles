@@ -153,7 +153,7 @@ def main():
     #Création des buttons (+ les afficher, avec pack)
     b_generate_terrain = tk.Button(f_buttons, text="Generate terrain",command=lambda:create_sandpiles_list(can))
     b_stabilize = tk.Button(f_buttons, text="Stabilize", command=stabilize_sandpiles_window)
-    b_save_config = tk.Button(f_buttons, text="Stabilize", command=save_config)
+    b_save_config = tk.Button(f_buttons, text="Save", command=save_config)
     
     # Création d'un Canvas
     can = tk.Canvas(f_canvas, width=SIZE_SANDPILE*(WIDTH_TERRAIN+2), height=SIZE_SANDPILE*(WIDTH_TERRAIN+2) )
@@ -207,7 +207,11 @@ def sum_up(l1=None, l2=None):
     #pour pouvoir tester:
     l1= generate_table();l2= generate_table()
     if l1!=None and l2!=None: # Juste une petite sécurité...
-        pass #à vous de jouer ! :D
+        for k in range(1, (len(l1)-1)):
+            for i in range(1,(len(l1[k])-1)):
+                l1[k][i] = int(l1[k][i]) + int(l2[k][i])
+                l2[k][i] = int(l2[k][i]) + int(l1[k][i])
+
 
 # Faire la somme case par case de liste
 # Même conseils
@@ -215,7 +219,10 @@ def substract(l1=None, l2=None):
     #pour pouvoir tester:
     l1= generate_table();l2= generate_table()
     if l1!=None and l2!=None: # Juste une petite sécurité...
-        pass #à vous de jouer ! :D
+        for k in range(1, (len(l1)-1)):
+            for i in range(1,(len(l1[k])-1)):
+                l1[k][i] = int(l1[k][i]) - int(l2[k][i])
+                l2[k][i] = int(l2[k][i]) - int(l1[k][i])
 
 
 # J'avais juste déjà l'idée... désolé - A COMPRENDRE!!
