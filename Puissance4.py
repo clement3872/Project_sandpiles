@@ -4,6 +4,6 @@
 # MURAT Feyzanur
 # FATNASSI Matéo
 # MARCHAL Clément
-# https://github.com/clement3872/Project_sandpiles.git
+# https://github.com/clement3872/Puissance4.git
 ###################################
 
