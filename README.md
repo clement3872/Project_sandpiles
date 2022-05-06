@@ -1,4 +1,4 @@
-# Project_sandpiles
+# Project_puissance4
 
 ###################################
 # Groupe MI TD4
@@ -8,3 +8,7 @@
 # MARCHAL Clément
 # https://github.com/clement3872/Puissance4
 ###################################
+
+
+## Installation 
+Il suffit juste de télécharger le fichier `Puissance4.py`
