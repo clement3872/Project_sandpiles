@@ -14,3 +14,7 @@
 Bien sûr, il faut avoir Python d'installé.
 Ensuite, il suffit de télécharger le fichier `Puissance4.py`
 
+
+# Le fonctionnement !
+Nous utilisons les bibliothèques Tkinter et random.
+Le code se lit de bas en haut
