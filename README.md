@@ -10,5 +10,7 @@
 ###################################
 
 
-## Installation 
-Il suffit juste de télécharger le fichier `Puissance4.py`
+## Installation - prérequis
+Bien sûr, il faut avoir Python d'installé.
+Ensuite, il suffit de télécharger le fichier `Puissance4.py`
+
