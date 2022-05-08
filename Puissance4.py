@@ -1,5 +1,5 @@
 ###################################
-# Groupe MI TD4
+# Groupe 3 - MI TD4
 # DESFONTAINES Alexia
 # MURAT Feyzanur
 # FATNASSI Matéo
@@ -9,6 +9,8 @@
 
 import random
 import tkinter as tk
+
+from numpy import bool_
 
 
 def print_list(l):
@@ -52,15 +54,6 @@ def add_token_to_list(column):
     
     l_tokens[i][column] = team
 
-
-"""
-[-1, -1, -1, -1, -1, -1, -1]
-[-1, -1, -1, -1, -1, -1, -1]
-[-1, -1, -1, 1, -1, -1, -1]
-[-1, -1, -1, 0, -1, -1, -1]
-[-1, -1, -1, 1, 0, -1, -1]
-[-1, 0, 0, 0, 0, 1, -1]
-"""
 
 def get_win_line(l_tokens):
 
@@ -111,7 +104,7 @@ def get_win_diags(l_tokens):
 
 
 def get_win():
-    global d_tokens, l_tokens, winning_team
+    global d_tokens, l_tokens, winning_team, canvas
 
     if winning_team == "white":
         line_color = get_win_line(l_tokens)
@@ -132,12 +125,6 @@ def get_win():
     
     return winning_team != "white"
         
-
-# pour gagner idée:
-# si la jeton + la somme de son coin i +1 j+1 or j+1 i-1 or i-1 j-1 or i+1 j-1 == 4 alors gagner
-    
-
-
 
 
 def create_token(x,y,color="white", outline_=""):
@@ -194,6 +181,7 @@ def add_token(event, base_x=-1):
         
         l_tokens_obj.append(create_token(x* radius,0, team_color[team]))
         fall(l_tokens_obj[-1], HEIGHT-BORDER-((d_tokens[x]-1)*radius))
+        
         get_win()
 
         if len(l_tokens_obj) == 42:
