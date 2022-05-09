@@ -1,7 +1,7 @@
 # Project_puissance4
 
 ###################################
-# Groupe MI TD4
+# Groupe 3 - L1 MI TD4
 # DESFONTAINES Alexia
 # MURAT Feyzanur
 # FATNASSI Matéo
