@@ -10,7 +10,7 @@
 import random
 import tkinter as tk
 
-from numpy import bool_
+from numpy import bool_, column_stack
 
 
 def print_list(l):
@@ -45,7 +45,18 @@ def create_grid_list():
     return l
 
 
-def add_token_to_list(column):
+
+def remove_token_to_list(): # not used
+    global l_tokens, l_x_moves
+    column = l_moves.pop()
+
+    i = len(l_tokens)-1
+    while (l_tokens[i][column]==0 or l_tokens[i][column]==1) and i>0: 
+            i -= 1
+    
+    l_tokens[i][column] = -1
+
+def add_token_to_list(column): # not used
     global canvas, l_tokens, columns_full, team, l_moves
 
     i = len(l_tokens)-1
@@ -189,12 +200,18 @@ def add_token(event, base_x=-1):
 
 
 def undo(canvas):
-    global d_tokens,l_tokens_obj,l_x_moves, team
-    
+    global d_tokens,l_tokens_obj,l_x_moves, team, l_tokens
+
     if l_x_moves != []:
-        if d_tokens[l_x_moves[-1]] > 0:
+        column = l_x_moves.pop()
+
+        if d_tokens[column] > 0:
+            
+            i = 6-d_tokens[column]
+            l_tokens[i][column] = -1
+
             team = (team + 1) % 2
-            d_tokens[l_x_moves.pop()] -= 1
+            d_tokens[column] -= 1
             canvas.delete(l_tokens_obj.pop())
 
 def reset(canvas):
