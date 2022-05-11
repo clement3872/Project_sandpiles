@@ -10,8 +10,6 @@
 import random
 import tkinter as tk
 
-from numpy import bool_, column_stack
-
 
 def print_list(l):
     print()
